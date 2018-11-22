@@ -23,7 +23,7 @@ public class foreachDemo {
         Map<String,Student> map=new HashMap<String,Student>();
         map.put("first", stu);
 
-        ScheduledThreadPoolExecutor
+        //ScheduledThreadPoolExecutor
     }
 
 
