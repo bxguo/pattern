@@ -9,9 +9,16 @@ public class BSTtest {
         BST bst = new BST();
 
         bst.put(1,"第一个");
+        bst.put(4,"第二个");
+        bst.put(2,"第三个");
+        bst.put(3,"第四个");
+        bst.put(7,"第五个");
+        bst.put(6,"第六个");
         System.out.println(bst);
 
-        String val = bst.get(1);
-        System.out.println(val);
+        for (int i = 0; i < 8; i++) {
+            String val = bst.get(i);
+            System.out.println(i+"::"+val);
+        }
     }
 }

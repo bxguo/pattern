@@ -75,7 +75,68 @@ public class BST {
         return x;
     }
 
+    /**
+     * 最小值
+     */
+    public Integer min(){
+        return min(root);
+    }
+    private Integer min(Node x){
+        if (x.left == null) {
+            return x.key;
+        } else {
+            return min(x.left);
+        }
+    }
+    /**
+     * 最大值
+     */
+    public Integer max(){
+        return max(root);
+    }
+    private Integer max(Node x){
+        if (x.left == null) {
+            return x.key;
+        } else {
+            return max(x.left);
+        }
+    }
 
+    /**
+     * 向下取整
+     * 原理就是在小的基础上找大的，向上取整刚好相反
+     */
+    public Integer floor(Integer key){
+        return floor(root, key);
+    }
+
+    private Integer floor(Node x, Integer key) {
+
+        if (x == null){
+            return null;
+        }
+
+        int i = key.compareTo(x.key);
+
+        //case 1 key刚好等于当前节点key，那么返回当前节点key
+        if (i == 0) {
+            return x.key;
+        }
+
+        //case 2 key小于当前节点key，那么左子树中寻找直到找到小于key的节点key
+        if (i < 0){
+            return floor(x.left, key);
+        }
+
+        //case 3 key大于当前节点key，那么向右子树中找寻直到找到大于key的节key
+        Integer t = floor(x.right, key);
+        if (t != null) {
+            return t;
+        } else {
+            return x.key;
+        }
+
+    }
 
     /**
      * 节点定义
@@ -87,7 +148,7 @@ public class BST {
         private Node left, right;
         private int N;
 
-        public Node(Integer key, String val, int n) {
+        private Node(Integer key, String val, int n) {
             this.key = key;
             this.val = val;
             N = n;
