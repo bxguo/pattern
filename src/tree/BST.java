@@ -32,7 +32,7 @@ public class BST {
      * @return
      */
     public String get(Integer key){
-        return null;
+        return get(root, key);
     }
     private String get(Node x, Integer key){
         if (x == null || key == null) {
