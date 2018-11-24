@@ -15,7 +15,7 @@ public class BST {
     /**
      * 节点数量
      */
-    public int size(){
+    int size(){
         return size(root);
     }
     private int size(Node x){
@@ -72,6 +72,7 @@ public class BST {
         }else {
             x.left = put(x.left, key, val);
         }
+        x.N = size(x.left) + size(x.right) + 1;
         return x;
     }
 
@@ -106,7 +107,7 @@ public class BST {
      * 向下取整
      * 原理就是在小的基础上找大的，向上取整刚好相反
      */
-    public Integer floor(Integer key){
+    Integer floor(Integer key){
         return floor(root, key);
     }
 
@@ -136,6 +137,88 @@ public class BST {
             return x.key;
         }
 
+    }
+    /**
+     * 向上取整
+     * 原理就是在大的基础上找小的
+     */
+    public Integer ceiling(Integer key){
+        return ceiling(root, key);
+    }
+
+    private Integer ceiling(Node x, Integer key) {
+
+        if (x == null){
+            return null;
+        }
+
+        int i = key.compareTo(x.key);
+
+        //case 1 key刚好等于当前节点key，那么返回当前节点key
+        if (i == 0) {
+            return x.key;
+        }
+
+        //case 2 key大于当前节点key，那么右子树中寻找直到找到大于key的节点key
+        if (i > 0){
+            return ceiling(x.right, key);
+        }
+
+        //case 3 key小于当前节点key，那么向左子树中找寻直到找到小于key的节key
+        Integer t = ceiling(x.left, key);
+        if (t != null) {
+            return t;
+        } else {
+            return x.key;
+        }
+
+    }
+
+    /**
+     * 查询排名为k的键
+     */
+    public Integer select(int k){
+        Node node = select(root, k);
+        if (node == null) {
+            return null;
+        }
+        return node.key;
+    }
+
+    private Node select(Node root, int k) {
+
+        if (root == null) {
+            return null;
+        }
+
+        int size = size(root.left);
+        if (size > k) {
+            return select(root.left, k);
+        } else if (size < k){
+            return select(root.right, k - size - 1);
+        }
+        return root;
+    }
+
+
+    /**
+     * 查询键key的排名
+     */
+    public int rank(Integer key){
+        return rank(root, key);
+    }
+
+    private int rank(Node root, Integer key) {
+        if (root == null) {
+            return 0;
+        }
+        int to = root.key.compareTo(key);
+        if (to > 0) {
+            return rank(root.left, key);
+        }else if (to < 0){
+            return size(root.left) + 1 + rank(root.right, key);
+        }
+        return size(root.left);
     }
 
     /**

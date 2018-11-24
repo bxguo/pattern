@@ -14,11 +14,16 @@ public class BSTtest {
         bst.put(3,"第四个");
         bst.put(7,"第五个");
         bst.put(6,"第六个");
-        System.out.println(bst);
+
+        System.out.println(bst.floor(5));
+
+        System.out.println(bst.select(5));
 
         for (int i = 0; i < 8; i++) {
             String val = bst.get(i);
             System.out.println(i+"::"+val);
         }
+
+        System.out.println(bst.size());
     }
 }
