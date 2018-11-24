@@ -31,7 +31,7 @@ public class BST {
      * @param key
      * @return
      */
-    public String get(Integer key){
+    String get(Integer key){
         return get(root, key);
     }
     private String get(Node x, Integer key){
@@ -55,7 +55,7 @@ public class BST {
      * @param key
      * @param val
      */
-    public void put(Integer key, String val){
+    void put(Integer key, String val){
         root = put(root, key, val);
     }
     private Node put(Node x, Integer key, String val){
@@ -80,13 +80,13 @@ public class BST {
      * 最小值
      */
     public Integer min(){
-        return min(root);
+        return min(root).key;
     }
-    private Integer min(Node x){
+    private Node min(Node x){
         if (x.left == null) {
-            return x.key;
+            return x;
         } else {
-            return min(x.left);
+            return min(x);
         }
     }
     /**
@@ -219,6 +219,64 @@ public class BST {
             return size(root.left) + 1 + rank(root.right, key);
         }
         return size(root.left);
+    }
+
+
+    /**
+     * 删除最小值
+     */
+    void deleteMin(){
+        deleteMin(root);
+    }
+
+    private Node deleteMin(Node x) {
+        if (x == null) {
+            return null;
+        }
+
+        if (x.left == null) {
+            return x.right;
+        }
+        x.left = deleteMin(x.left);
+
+        x.N = size(x.left) + size(x.right) + 1;
+        return x;
+
+    }
+
+    /**
+     * 删除指定节点
+     */
+    void delete(Integer key){
+        delete(root, key);
+    }
+
+    private Node delete(Node x, Integer key) {
+        if (x == null) {
+            return null;
+        }
+
+        int i = x.key.compareTo(key);
+
+        if (i < 0) {
+            x.left = delete(x.left, key);
+        } else if (i > 0) {
+            x.right = delete(x.right, key);
+        } else {
+            if (x.right == null) {
+                return x.left;
+            }
+            if (x.left == null) {
+                return x.right;
+            }
+            // 关键删除逻辑
+            Node t = x;
+            x = min(t.right);
+            x.right = deleteMin(t.right);
+            x.left = t.left;
+        }
+        x.N = size(x.left) + size(x.right) + 1;
+        return x;
     }
 
     /**
