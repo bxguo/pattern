@@ -6,11 +6,11 @@ import java.util.ArrayList;
  * @author: bxguo
  * @time: 2018/12/26 17:29
  */
-public class BenzBuilder extends CarBuilder {
+public class BWMBuilder extends CarBuilder {
     @Override
     CarModel getCar(ArrayList<String> sequence) {
-        BenzModel benzModel = new BenzModel();
-        benzModel.setSequence(sequence);
-        return benzModel;
+        BMWModel bmwModel = new BMWModel();
+        bmwModel.setSequence(sequence);
+        return bmwModel;
     }
 }
