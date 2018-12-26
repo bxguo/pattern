@@ -8,13 +8,8 @@ import java.util.ArrayList;
  */
 public class Client {
     public static void main(String[] args) {
-        ArrayList<String> sequence = new ArrayList<String>();
-        sequence.add(CarModel.ALARM);
-        sequence.add(CarModel.START);
-        sequence.add(CarModel.STOP);
-
-        BenzModel benz = new BenzModel();
-        benz.setSequence(sequence);
-        benz.run();
+        CarBuilder benzBuilder = new BenzBuilder();
+        CarModel carModel = benzBuilder.getCarModel();
+        carModel.run();
     }
 }
