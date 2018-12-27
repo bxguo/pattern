@@ -33,6 +33,7 @@ public abstract class CarModel {
                     break;
             }
         }
+        System.out.println("------------------------------");
     }
 
     public final void setSequence(ArrayList<String> sequence) {

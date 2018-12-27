@@ -8,8 +8,10 @@ import java.util.ArrayList;
  */
 public class Client {
     public static void main(String[] args) {
-        CarBuilder benzBuilder = new BenzBuilder();
-        CarModel carModel = benzBuilder.getCarModel();
-        carModel.run();
+        for (int i = 0; i < 10; i++) {
+            Director director = new Director();
+            CarModel benzAAA = director.getBenzAAA();
+            benzAAA.run();
+        }
     }
 }
